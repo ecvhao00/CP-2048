@@ -131,8 +131,17 @@ void add_special_tile() {
 
 // 게임 초기화
 void init_game() {
+
     system("chcp 65001 > nul");
+
     srand((unsigned)time(NULL));
+
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            board[i][j] = 0;
+        }
+    }
+    move_count = 0;
     add_random_tile();
     add_random_tile();
     draw_map();
@@ -155,7 +164,7 @@ void start() {
 
         move_count++;
 
-        if (move_count % 4 == 0)
+        if (move_count % 8 == 0)
             add_special_tile();
         else
             add_random_tile();
@@ -206,7 +215,7 @@ void over() {
     scanf(" %c", &ch);
 
     if (ch == 'y' || ch == 'Y') {
-        init_game(); // 다시 시작
+        start(); // 다시 시작
     }
     else {
         exit(0); // 종료
