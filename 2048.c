@@ -16,6 +16,9 @@ void left();
 void right();
 void up();
 void down();
+void print_title();
+void game_description();
+void game_exit();
 
 int board[size][size] = { 0 };
 int move_count = 0;
@@ -98,6 +101,8 @@ void draw_numbers() {
 }
 
 
+
+
 // 랜덤 일반 타일 생성
 void add_random_tile() {
     int empty[16][2], count = 0;
@@ -173,12 +178,73 @@ void start() {
         draw_numbers();
     }
 }
-
-// 메인
 int main() {
-    start();  // 완성된 게임 루프 시작
+    SetConsoleOutputCP(CP_UTF8);
+    int choice = 0;
+
+    while (1) {
+        system("cls");
+        print_title();
+
+        printf("\n ▶ 메뉴를 선택하세요 (1~3): ");
+        choice = _getch();
+
+        switch (choice) {
+        case '1':
+            start();
+            break;
+        case '2':
+            game_description();
+            break;
+        case '3':
+            game_exit();
+            return 0;
+        default:
+            printf("\n 잘못된 입력입니다. 아무 키나 누르세요.");
+            (void)_getch();
+        }
+    }
+
     return 0;
 }
+
+void print_title() {
+    printf("===================================\n");
+    printf(" ::::::::   :::::::      :::      ::::::::  \n"
+        ":+:    :+: :+:   :+:    :+:      :+:    :+: \n"
+        "      +:+  +:+  :+:+   +:+ +:+   +:+    +:+ \n"
+        "    +#+    +#+ + +:+  +#+  +:+    +#++:++#  \n"
+        "  +#+      +#+#  +#+ +#+#+#+#+#+ +#+    +#+ \n"
+        " #+#       #+#   #+#       #+#   #+#    #+# \n"
+        "##########  #######        ###    ########  \n");
+    printf("===================================\n");
+    printf("1. 게임 시작 \n");
+    printf("2. 게임 설명 \n");
+    printf("3. 나가기 \n");
+    printf("===================================\n");
+}
+
+void game_description() {
+    system("cls");
+    printf("========== 게임 설명 ==========\n");
+    printf("▶ 같은 숫자의 타일을 합쳐\n");
+    printf("   2048 타일을 만드는 게임입니다.\n");
+    printf("▶ 'w,a,s,d로 타일을 이동시키세요.\n");
+    printf("▶ 합쳐질 수 있는 같은 숫자가\n");
+    printf("   만나면 자동으로 합쳐집니다.\n");
+    printf("▶★(2배), ÷(2로 나누기), X(해당 줄 삭제) \n");
+    printf(" 와 같은 특수 타일을 이용하여 높은 점수를 노려보세요!\n");
+    printf("===============================\n");
+    printf("\n아무 키나 누르면 메뉴로 돌아갑니다...");
+    (void)_getch();  // 반환값 무시 경고 방지
+}
+
+void game_exit() {
+    printf("\n게임을 종료합니다. 감사합니다!\n");
+    Sleep(1000);  // 종료 전 1초 대기
+}
+
+
 
 
 
